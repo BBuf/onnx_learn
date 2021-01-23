@@ -1,0 +1,408 @@
+ir_version: 6
+producer_name: "pytorch"
+producer_version: "1.7"
+graph {
+  node {
+    input: "input"
+    output: "1"
+    name: "Shape_0"
+    op_type: "Shape"
+  }
+  node {
+    input: "1"
+    input: "2"
+    output: "3"
+    name: "Gather_2"
+    op_type: "Gather"
+    attribute {
+      name: "axis"
+      i: 0
+      type: INT
+    }
+  }
+  node {
+    input: "input"
+    output: "4"
+    name: "Shape_3"
+    op_type: "Shape"
+  }
+  node {
+    input: "4"
+    input: "5"
+    output: "6"
+    name: "Gather_5"
+    op_type: "Gather"
+    attribute {
+      name: "axis"
+      i: 0
+      type: INT
+    }
+  }
+  node {
+    input: "input"
+    output: "7"
+    name: "Shape_6"
+    op_type: "Shape"
+  }
+  node {
+    input: "7"
+    input: "8"
+    output: "9"
+    name: "Gather_8"
+    op_type: "Gather"
+    attribute {
+      name: "axis"
+      i: 0
+      type: INT
+    }
+  }
+  node {
+    input: "input"
+    output: "10"
+    name: "Shape_9"
+    op_type: "Shape"
+  }
+  node {
+    input: "10"
+    input: "11"
+    output: "12"
+    name: "Gather_11"
+    op_type: "Gather"
+    attribute {
+      name: "axis"
+      i: 0
+      type: INT
+    }
+  }
+  node {
+    input: "3"
+    output: "13"
+    name: "Unsqueeze_12"
+    op_type: "Unsqueeze"
+    attribute {
+      name: "axes"
+      ints: 0
+      type: INTS
+    }
+  }
+  node {
+    input: "6"
+    output: "14"
+    name: "Unsqueeze_13"
+    op_type: "Unsqueeze"
+    attribute {
+      name: "axes"
+      ints: 0
+      type: INTS
+    }
+  }
+  node {
+    input: "9"
+    output: "15"
+    name: "Unsqueeze_14"
+    op_type: "Unsqueeze"
+    attribute {
+      name: "axes"
+      ints: 0
+      type: INTS
+    }
+  }
+  node {
+    input: "12"
+    output: "16"
+    name: "Unsqueeze_15"
+    op_type: "Unsqueeze"
+    attribute {
+      name: "axes"
+      ints: 0
+      type: INTS
+    }
+  }
+  node {
+    input: "13"
+    input: "14"
+    input: "15"
+    input: "16"
+    output: "17"
+    name: "Concat_16"
+    op_type: "Concat"
+    attribute {
+      name: "axis"
+      i: 0
+      type: INT
+    }
+  }
+  node {
+    input: "input"
+    input: "17"
+    output: "output"
+    name: "Reshape_17"
+    op_type: "Reshape"
+  }
+  name: "torch-jit-export"
+  initializer {
+    data_type: 7
+    name: "2"
+    raw_data: "\000\000\000\000\000\000\000\000"
+  }
+  initializer {
+    data_type: 7
+    name: "5"
+    raw_data: "\001\000\000\000\000\000\000\000"
+  }
+  initializer {
+    data_type: 7
+    name: "8"
+    raw_data: "\003\000\000\000\000\000\000\000"
+  }
+  initializer {
+    data_type: 7
+    name: "11"
+    raw_data: "\002\000\000\000\000\000\000\000"
+  }
+  input {
+    name: "input"
+    type {
+      tensor_type {
+        elem_type: 1
+        shape {
+          dim {
+            dim_value: 2
+          }
+          dim {
+            dim_value: 3
+          }
+          dim {
+            dim_value: 4
+          }
+          dim {
+            dim_value: 5
+          }
+        }
+      }
+    }
+  }
+  input {
+    name: "2"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+        }
+      }
+    }
+  }
+  input {
+    name: "5"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+        }
+      }
+    }
+  }
+  input {
+    name: "8"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+        }
+      }
+    }
+  }
+  input {
+    name: "11"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+        }
+      }
+    }
+  }
+  output {
+    name: "output"
+    type {
+      tensor_type {
+        elem_type: 1
+        shape {
+          dim {
+            dim_value: 2
+          }
+          dim {
+            dim_value: 3
+          }
+          dim {
+            dim_value: 5
+          }
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "1"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "3"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+        }
+      }
+    }
+  }
+  value_info {
+    name: "4"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "6"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+        }
+      }
+    }
+  }
+  value_info {
+    name: "7"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "9"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+        }
+      }
+    }
+  }
+  value_info {
+    name: "10"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "12"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+        }
+      }
+    }
+  }
+  value_info {
+    name: "13"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 1
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "14"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 1
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "15"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 1
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "16"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 1
+          }
+        }
+      }
+    }
+  }
+  value_info {
+    name: "17"
+    type {
+      tensor_type {
+        elem_type: 7
+        shape {
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+}
+opset_import {
+  domain: ""
+  version: 9
+}
