@@ -13,3 +13,4 @@ net = JustReshape()
 model_name = 'just_reshape.onnx'
 dummy_input = torch.randn(2, 3, 4, 5)
 torch.onnx.export(net, dummy_input, model_name, input_names=['input'], output_names=['output'])
+
