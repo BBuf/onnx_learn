@@ -71,6 +71,20 @@ class Tool(object):
         else:
             print('get model input failed, check index or name')
     
+    # 通过名字获取onnx模型中的计算节点
+    def get_node_by_name(self, name):
+        for node in self.model.graph.node:
+            if node.name == name:
+                return node
     
+    # 通过op的类型获取onnx模型的计算节点
+    def get_nodes_by_optype(self, typename):
+        nodes = []
+        for node in self.model.graph.node:
+            if node.op_type == typename:
+                nodes.append(node)
+        return nodes
 
-    
+    # 通过名字获取onnx模型计算节点的权重
+    def get_weight_by_name(self, name):
+            
