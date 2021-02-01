@@ -6,6 +6,6 @@ from onnx import numpy_helper
 
 from test_tool import *
 
-model = onnx.load("../model/just_reshape.onnx")
+model = onnx.load("../model/tiny-yolov3-11.onnx")
 onnx.checker.check_model(model)
 print('The model is:\n{}'.format(model))

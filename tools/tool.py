@@ -87,4 +87,47 @@ class Tool(object):
 
     # 通过名字获取onnx模型计算节点的权重
     def get_weight_by_name(self, name):
-            
+        for weight in self.model.graph.initializer:
+            if weight.name == name:
+                return weight
+    
+    # 注意这个weight是TensorProto类型，`https://github.com/onnx/onnx/blob/b1e0bc9a31eaefc2a9946182fbad939843534984/onnx/onnx.proto#L461`
+    def set_weight(self, weight, data_numpy=None, all_ones=False, all_zeros=False):
+        if data_numpy is not None:
+            raw_shape = tuple([i for i in weight.dims])
+            new_shape = np.shape(data_numpy)
+            if weight.data_type == 8:
+                print("Can NOT handle string data type right now...")
+                exit()
+            if new_shape != raw_shape:
+                print("Warning: the new weight shape is not consistent with original shape!")
+                weight.dims[:] = list(new_shape)
+                for model_input in self.model.graph.input:
+                    if model_input.name == weight.name:
+                        # copy from onnx.helper...
+                        tensor_shape_proto = model_input.type.tensor_type.shape
+                        tensor_shape_proto.ClearField("dim")
+                        tensor_shape_proto.dim.extend([])
+                        for d in new_shape:
+                            dim = tensor_shape_proto.dim.add()
+                            dim.dim_value = d
+
+            weight.ClearField("float_data")
+            weight.ClearField("int32_data")
+            weight.ClearField("int64_data")
+            weight.raw_data = data_numpy.tobytes()
+        else:
+            if all_ones:
+                wr = numpy_helper.to_array(weight)
+                wn = np.ones_like(wr)
+            elif all_zeros:
+                wr = numpy_helper.to_array(weight)
+                wn = np.zeros_like(wr)
+            else:
+                print("You must give a data_numpy to set the weight, or set the all_ones/all_zeros flag.")
+                exit()
+            weight.ClearField("float_data")
+            weight.ClearField("int32_data")
+            weight.ClearField("int64_data")
+            weight.raw_data = wn.tobytes()
+
