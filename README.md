@@ -22,5 +22,7 @@
 
 - tools  维护一个工具类，方便修改ONNX模型来解决ONNX版本迭代以及框架之间对OP定义的不兼容问题。
 
+# 相关链接
 
-    
+- https://github.com/daquexian/onnx-simplifier
+- https://github.com/bindog/onnx-surgery

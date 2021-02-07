@@ -91,7 +91,7 @@ class Tool(object):
             if weight.name == name:
                 return weight
     
-    # 注意这个weight是TensorProto类型，`https://github.com/onnx/onnx/blob/b1e0bc9a31eaefc2a9946182fbad939843534984/onnx/onnx.proto#L461`
+    # 设置权重，注意这个weight是TensorProto类型，`https://github.com/onnx/onnx/blob/b1e0bc9a31eaefc2a9946182fbad939843534984/onnx/onnx.proto#L461`
     def set_weight(self, weight, data_numpy=None, all_ones=False, all_zeros=False):
         if data_numpy is not None:
             raw_shape = tuple([i for i in weight.dims])
@@ -130,4 +130,11 @@ class Tool(object):
             weight.ClearField("int32_data")
             weight.ClearField("int64_data")
             weight.raw_data = wn.tobytes()
+
+    # 通过名字设置ONNX节点的权重
+    def set_weight_by_name(self, name, data_numpy=None, all_ones=False, all_zeros=False):
+        weight = self.get_weight_by_name(name)
+        self.set_weight(weight, data_numpy, all_ones, all_zeros)
+    
+    
 
