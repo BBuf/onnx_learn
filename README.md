@@ -20,7 +20,7 @@
 - onnxapi
     - creat_onnx_example.py 创建一个onnx模型例子
 
-- tools  维护一个工具类，方便修改ONNX模型来解决ONNX版本迭代以及框架之间对OP定义的不兼容问题。
+- tools  维护一个工具类，方便修改ONNX模型来解决ONNX版本迭代以及框架之间对OP定义的不兼容问题
 
 # 相关链接
 

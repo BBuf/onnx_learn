@@ -136,5 +136,51 @@ class Tool(object):
         weight = self.get_weight_by_name(name)
         self.set_weight(weight, data_numpy, all_ones, all_zeros)
     
-    
+    # 移除ONNX模型中的目标节点
+    def remove_node(self, target_node):
+        '''
+            删除只有一个输入和输出的节点
+        '''
+        node_input = target_node.input[0]
+        node_output = target_node.output[0]
+        # 将后继节点的输入设置为目标节点的前置节点
+        for node in self.model.graph.node:
+            for i, n in enumerate(node.input):
+                if n == node_output:
+                    node.input[i] = node_input
 
+        target_names = set(target_node.input) & set([weight.name for weight in self.model.graph.initializer])
+        self.remove_weights(target_names)
+        target_names.add(node_output)
+        self.remove_inputs(target_names)
+        self.remove_value_infos(target_names)
+        self.model.graph.node.remove(target_node)
+
+    # 移除ONNX模型中指定节点的权重
+    def remove_weights(self, name_list):
+        rm_list = []
+        for weight in self.model.graph.initializer:
+            if weight.name in name_list:
+                rm_list.append(weight)
+        for weight in rm_list:
+            self.model.graph.initializer.remove(weight)
+
+    # 移除ONNX模型中指定的输入节点
+    def remove_inputs(self, name_list):
+        rm_list = []
+        for input_t in self.model.graph.input:
+            if input_t.name in name_list:
+                rm_list.append(input_t)
+        for input_t in rm_list:
+            self.model.graph.input.remove(input_t)
+
+    # 移除ONNX模型中指定的输入输出节点
+    def remove_value_infos(self, name_list):
+        rm_list = []
+        for value_info in self.model.graph.value_info:
+            if value_info.name in name_list:
+                rm_list.append(value_info)
+        for value_info in rm_list:
+            self.model.graph.value_info.remove(value_info)
+
+    
