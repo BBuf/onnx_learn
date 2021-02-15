@@ -99,8 +99,6 @@ def show_node_inputs(node):
 
 
 def show_node_outputs(node):
-    # Generally, the first input is the truely input
-    # and the rest input is weight initializer
     print("="*10, "outputs of node: ", node.name, "="*10)
     for output_name in node.output:
         print(output_name)  # type of output_name is str

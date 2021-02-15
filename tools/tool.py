@@ -218,7 +218,7 @@ class Tool(object):
             target_node.attribute.append(helper.make_attribute(attr_name, attr_value))
             flag = True
         return flag
-    
+
     def chunk_at(self, target_node):
         r_nodes = [target_node]
         r_input_names = [input_n for input_n in target_node.input]
@@ -343,6 +343,7 @@ class Tool(object):
         self.model.graph.input.extend(weight_input_vi)
         self.model.graph.initializer.extend(weight_initializer)
 
+    # 将target_node添加到ONNX模型中作为输出节点
     def add_extra_output(self, target_node, output_name):
         target_output = target_node.output[0]
         extra_shape = []
@@ -356,17 +357,6 @@ class Tool(object):
                                 extra_elem_type,
                                 extra_shape
                             )
-        '''
-            # NOTE
-            # if we know the value type and shape, we can alse use this
-	    def make_tensor_value_info(
-		    name,  # type: Text
-		    elem_type,  # type: int
-		    shape,  # type: Optional[Sequence[Union[Text, int]]]
-		    doc_string="",  # type: Text
-		    shape_denotation=None,  # type: Optional[List[Text]]
-	    ):
-        '''
         identity_node = helper.make_node('Identity', inputs=[target_output], outputs=[output_name], name=output_name)
         self.model.graph.node.append(identity_node)
         self.model.graph.output.append(extra_output)
