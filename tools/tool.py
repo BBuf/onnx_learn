@@ -275,6 +275,7 @@ class Tool(object):
         for output in d_outputs:
             self.model.graph.output.remove(output)
 
+    # 在指定节点前插入flatten node
     def insert_flatten_before(self, target_node):
         # get target_node inputs
         node_input = target_node.input[0]
@@ -288,6 +289,7 @@ class Tool(object):
                 self.model.graph.node.insert(target_node_index, flatten_node)
                 break
 
+    # 在指定节点target_node前插入一个新的OP
     def insert_op_before(self, node_name, target_node, input_idx=0, *args, **kwargs):
         '''
         op_name

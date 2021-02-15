@@ -6,6 +6,7 @@ from onnx import numpy_helper
 
 from test_tool import *
 
+# mxnet老版本遗留问题
 def old_mxnet_version_example(tool):
     # NOTE 1
     # in some old version mxnet model, the fix_gamma in BatchNormalization is set to True,
@@ -22,7 +23,7 @@ def old_mxnet_version_example(tool):
     for avg_node in avg_nodes:
         tool.set_node_attribute(avg_node, "count_include_pad", 1)
 
-
+# 为tensorflow转出来的ONNX模型设置batch维度
 def tf_set_batch_size_example(tool, batch_size=8):
     # NOTE
     # when using tf2onnx convert the tensorflow pb model to onnx
@@ -31,7 +32,7 @@ def tf_set_batch_size_example(tool, batch_size=8):
     # tool.set_model_input_shape(name="pb_input:0", shape=(32,3,256,256))
     tool.set_model_input_batch_size(batch_size=batch_size)
 
-
+# 获取我们想要地任意节点的推理结果
 def debug_internal_output(tool, node_name, output_name):
     # NOTE
     # sometimes we hope to get the internal result of some node for debug,
@@ -55,7 +56,7 @@ def tensorrt_set_epsilon_example(tool, epsilon=1e-3):
     for in_node in in_nodes:
         tool.set_node_attribute(in_node, "epsilon", epsilon)
 
-
+# 在ONNX模型的指定节点前添加卷积OP
 def add_conv_layer(tool, target_node_name):
     # NOTE:
     # The name, attribute and weight of the OP can be found at:
@@ -82,13 +83,14 @@ def add_conv_layer(tool, target_node_name):
                     attr_dict=attr_dict
                 )
 
+# 查看ONNX节点的属性
 def show_node_attributes(node):
     print("="*10, "attributes of node: ", node.name, "="*10)
     for attr in node.attribute:
         print(attr.name)
     print("="*60)
 
-
+# 查看ONNX节点的输入
 def show_node_inputs(node):
     # Generally, the first input is the truely input
     # and the rest input is weight initializer
@@ -97,14 +99,14 @@ def show_node_inputs(node):
         print(input_name)  # type of input_name is str
     print("="*60)
 
-
+# 查看ONNX节点的输出
 def show_node_outputs(node):
     print("="*10, "outputs of node: ", node.name, "="*10)
     for output_name in node.output:
         print(output_name)  # type of output_name is str
     print("="*60)
 
-
+# 打印权重
 def show_weight(weight):
     print("="*10, "details of weight: ", weight.name, "="*10)
     print("data type: ", weight.data_type)
@@ -125,7 +127,6 @@ if __name__ == "__main__":
     # old_mxnet_version_example(tool)
     # tf_set_batch_size_example(tool, 16)
     # debug_internal_output(tool, "your target node name", "debug_test")
-    # tensorrt_set_epsilon_example(tool, 1e-3)
-    add_conv_layer(tool, "resnetv24_batchnorm1_fwd")
+    tensorrt_set_epsilon_example(tool, 1e-3)
 
     tool.export(args.output)
