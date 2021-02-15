@@ -3,8 +3,8 @@ import onnx
 import numpy as np
 from onnx import helper
 from onnx import numpy_helper
-
-from test_tool import *
+import argparse
+from tools import *
 
 # mxnet老版本遗留问题
 def old_mxnet_version_example(tool):
@@ -32,7 +32,7 @@ def tf_set_batch_size_example(tool, batch_size=8):
     # tool.set_model_input_shape(name="pb_input:0", shape=(32,3,256,256))
     tool.set_model_input_batch_size(batch_size=batch_size)
 
-# 获取我们想要地任意节点的推理结果
+# 获取我们想要的任意节点的推理结果
 def debug_internal_output(tool, node_name, output_name):
     # NOTE
     # sometimes we hope to get the internal result of some node for debug,

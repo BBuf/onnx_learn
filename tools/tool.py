@@ -4,11 +4,6 @@ import numpy as np
 from onnx import helper
 from onnx import numpy_helper
 
-def get_input_names(model: onnx.ModelProto) -> List[str]:
-    input_names = list(set([ipt.name for ipt in model.graph.input]) -
-                       set([x.name for x in model.graph.initializer]))
-    return input_names
-
 class Tool(object):
     # 初始化onnx模型
     def __init__(self, onnx_model_path):
@@ -18,7 +13,7 @@ class Tool(object):
         self.outputs = []
 
     # 保存onnx模型
-    def save(self, save_path):
+    def export(self, save_path):
         onnx.checker.check_model(self.model)
         self.model = onnx.shape_inference.infer_shapes(self.model)
         onnx.save(self.model, save_path)
