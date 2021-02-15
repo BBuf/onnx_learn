@@ -2,7 +2,7 @@ import onnx
 from onnxsim import simplify
 
 # load your predefined ONNX model
-model = onnx.load('just_reshape.onnx')
+model = onnx.load('model/just_reshape.onnx')
 
 input_shapes = {}
 
@@ -24,6 +24,6 @@ model_simp, check = simplify(model)
 
 assert check, "Simplified ONNX model could not be validated"
 
-onnx.save(model_simp, 'similifier.onnx')
+onnx.save(model_simp, 'model/simplifier.onnx')
 
 # use model_simp as a standard ONNX model object
