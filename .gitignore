@@ -1,2 +1,4 @@
 *.onnx
 *.pyc
+*.pth
+model/
