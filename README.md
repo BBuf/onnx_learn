@@ -13,14 +13,18 @@
 
 - convert2onnx
     - pytorch2onnx_resize.py 通过Pytorch导出ONNX模型，Reshape操作
-- onnxslim ONNX简化程序，来自大缺弦，[点这里](https://github.com/daquexian/onnx-simplifier)
 - onnxapi
     - creat_onnx_example.py 创建一个onnx模型例子
 - tools  维护一个工具类，方便修改ONNX模型来解决ONNX版本迭代以及框架之间对OP定义的不兼容问题
-- onnx_simplifer.py  调用onnxslim简化ONNX模型
 - test_tool.py 测试ONNX工具类
 
-# 相关链接
+# 学习笔记
 
-- https://github.com/daquexian/onnx-simplifier
-- https://github.com/bindog/onnx-surgery
+- [ONNX初探](https://mp.weixin.qq.com/s/H1tDcmrg0vTcSw9PgpgIIQ)
+- [ONNX再探](https://mp.weixin.qq.com/s/_iNhfZNR5-swXLhHKjYRkQ)
+- [onnx simplifier 和 optimizer](https://mp.weixin.qq.com/s/q0Aa2LRpeCPCnIzRJbMmaQ)
+- [onnx2pytorch和onnx-simplifier新版介绍](https://mp.weixin.qq.com/s/NDv-quXeBrPeDcCbg97FHA)
+- [深度学习框架OneFlow是如何和ONNX交互的？](https://mp.weixin.qq.com/s/sxBDHl00jAKRXq-Y6Rii7A)
+- [Pytorch转ONNX-理论篇](https://mp.weixin.qq.com/s/RoqaMPwCbtHfLKgnJX95ng)
+- [Pytorch转ONNX-实战篇1（tracing机制）](https://mp.weixin.qq.com/s/L2lZAo35ZeybuiH3tgJsvw)
+- [Pytorch转ONNX-实战篇2（实战踩坑总结）](https://mp.weixin.qq.com/s/nG45SDO2_J48omSkn27EtQ)
